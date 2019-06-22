@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        .lunbotu {
+            width: 500px;
+            height: 375px;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        ul {
+            width: 100%;
+            height: 100%;
+            list-style: none;
+
+        }
+
+        ul>li {
+            width: 20%;
+            height: 100%;
+            float: left;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+
+        ul>li>span {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        ul>li>span:nth-of-type(1) {
+            background: url('./images/img1.jpg');
+            transform: translateZ(187px)
+        }
+
+        ul>li>span:nth-of-type(2) {
+            background: url('./images/img2.jpg');
+            transform: translateY(-187px) rotateX(90deg)
+        }
+
+        ul>li>span:nth-of-type(3) {
+            background: url('./images/img3.jpg');
+            transform: translateZ(-187px) rotateX(180deg)
+        }
+
+        ul>li>span:nth-of-type(4) {
+            background: url('./images/img4.jpg');
+            transform: translateY(187px) rotateX(-90deg)
+        }
+
+        ul>li:nth-of-type(2)>span {
+            background-position: -100px 0
+        }
+
+        ul>li:nth-of-type(3)>span {
+            background-position: -200px 0
+        }
+
+        ul>li:nth-of-type(4)>span {
+            background-position: -300px 0
+        }
+
+        ul>li:nth-of-type(5)>span {
+            background-position: -400px 0
+        }
+
+        #pre,
+        #next {
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+            text-decoration: none;
+            position: absolute;
+            font-size: 40px;
+            top: 50%;
+            transform: translate(0, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            cursor: default
+        }
+
+        #pre {
+            left: 0
+        }
+
+        #next {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lunbotu">
+        <ul>
+            <!-- 将图片切割成五块（li），点击上（下）一张每一块都会转动 -->
+            <li>
+                <!-- 每一个span是一个结构面，放一张图片 -->
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </li>
+        </ul>
+        <span id="pre">&lt;</span>
+        <span id="next">&gt;</span>
+    </div>
+    <script>
+        var index = 0;
+        var flag = true;
+        document.getElementById('next').onclick = function () {
+            if (flag) {
+                flag = false;
+                index--;
+                var lists = document.getElementsByTagName('li')
+                for (var i = 0; i < lists.length; i++) {
+                    lists[i].style.transform = "rotatex(" + index * 90 + "deg)";
+                    lists[i].style.transitionDelay = i * 0.2 + "s";
+                }
+                setTimeout(() => {
+                    flag=true;
+                }, 1500);
+            }
+        }
+        document.getElementById('pre').onclick = function () {
+            if (flag) {
+                flag = false;
+                index++;
+                var lists = document.getElementsByTagName('li')
+                for (var i = 0; i < lists.length; i++) {
+                    lists[i].style.transform = "rotatex(" + index * 90 + "deg)";
+                    lists[i].style.transitionDelay = i * 0.2 + "s";
+                }
+                setTimeout(() => {
+                    flag=true;
+                }, 1500);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
